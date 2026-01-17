@@ -1,0 +1,54 @@
+package com.example.randomoutfitgenerator;
+
+import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
+import android.widget.Button;
+import android.widget.ImageView;
+
+import java.util.Random;
+
+public class MainActivity extends AppCompatActivity {
+
+    ImageView imgTop, imgBottom, imgAccessories;
+    Button btnGenerate;
+
+    int[] tops = {R.drawable.top1, R.drawable.top2, R.drawable.top3, R.drawable.top4};
+    int[] bottoms = {R.drawable.bottom1, R.drawable.bottom2, R.drawable.bottom3, R.drawable.bottom4};
+    int[] accessories = {R.drawable.acc1, R.drawable.acc2, R.drawable.acc3};
+
+    Random random = new Random();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+
+        imgTop = findViewById(R.id.imgTop);
+        imgBottom = findViewById(R.id.imgBottom);
+        imgAccessories = findViewById(R.id.imgAccessories);
+        btnGenerate = findViewById(R.id.btnGenerate);
+
+        // Default images on start
+        imgTop.setImageResource(topRandom());
+        imgBottom.setImageResource(bottomRandom());
+        imgAccessories.setImageResource(accessoryRandom());
+
+        btnGenerate.setOnClickListener(view -> {
+            imgTop.setImageResource(topRandom());
+            imgBottom.setImageResource(bottomRandom());
+            imgAccessories.setImageResource(accessoryRandom());
+        });
+    }
+
+    private int topRandom() {
+        return tops[random.nextInt(tops.length)];
+    }
+
+    private int bottomRandom() {
+        return bottoms[random.nextInt(bottoms.length)];
+    }
+
+    private int accessoryRandom() {
+        return accessories[random.nextInt(accessories.length)];
+    }
+}
